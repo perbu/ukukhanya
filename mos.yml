@@ -1,0 +1,43 @@
+author: Per Buer
+description: Control RGB leds through shadow devices and MQTT streams
+version: 0.1
+
+platform: esp32
+
+includes:
+  - include
+
+tags:
+  - c
+
+sources:
+  - src
+
+filesystem:
+  - fs
+
+libs:
+  - origin: https://github.com/mongoose-os-libs/neopixel
+  - origin: https://github.com/mongoose-os-libs/boards
+  - origin: https://github.com/mongoose-os-libs/ca-bundle
+  - origin: https://github.com/mongoose-os-libs/rpc-service-config
+  - origin: https://github.com/mongoose-os-libs/rpc-service-fs
+  - origin: https://github.com/mongoose-os-libs/rpc-service-ota
+  - origin: https://github.com/mongoose-os-libs/rpc-uart
+  - origin: https://github.com/mongoose-os-libs/wifi
+  - origin: https://github.com/mongoose-os-libs/aws
+  - origin: https://github.com/mongoose-os-libs/dash 
+  
+  
+manifest_version: 2017-09-29
+
+config_schema:
+  - ["pins.statusLed", "i", 2, { title: "LED for status."}]
+  - ["pins.ledStrip", "i", 23, { title: "GPIO pin for LED strip" }]
+  - ["leds.number", "i", 40, {title: "Number of LEDS on the strip"}]
+
+  - ["leds.updateinterval", "i", 10, {title: "How often we update the leds. Affect decay and shadow."}]
+
+  - ["leds.decay", "i", 10, {title: "(stream) How fast does the LED decay. 0 is no decay, 1 is the slowest. 255 is the fastest."}]
+  
+  - ["leds.blinkstep", "i", 3, {title: "(shadow) How big are the blink steps - 1-50"}]
